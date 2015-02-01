@@ -1,10 +1,9 @@
 <div data-bind="visible: page() == 'engines'">
 <div data-bind="foreach: engines()">
-	<a href="#" class="btn" data-bind="click: $root.loadengine.bind($root, id())" style="color:black">
+	<a href="#" class="btn" data-bind="click: $root.loadengine.bind($root, id())">
 		<b data-bind="text: name"></b>
 	</a>
 	<br>
 </div>
-
 </div>
 @engine()

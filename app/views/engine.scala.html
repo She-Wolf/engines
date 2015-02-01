@@ -1,39 +1,61 @@
 <div data-bind="visible: (page() == 'engine' && engines().length>0)">
 <h4 data-bind="text: name"></h4>
-<img data-bind="src: '@routes.Assets.at("/images/")' + imglink()">
-<table class="table table-bordered">
+
+<table width="100%">
 	<tr>
-		<td><b>Тип</b></td>
-		<td><b>Двигатель / редуктор</b></td>
-		<td><b>Мощность</b></td>
-		<td><b>Максимальные обороты</b></td>
-		<td><b>Вес</b></td>
-		<td><b>Габариты</b></td>
-		<td><b>Объем двигателя</b></td>
-	</tr>
+		<td style="vertical-align: top">
+			<img data-bind="attr: {src: '@routes.Assets.at("images/")' + imglink()}" />
+		</td>
+		<td>
+			<table class="table table-bordered">
+				<tr>
+					<td><b>Тип:</b></td>
+					<td data-bind="text: category"></td>
+				</tr>
+				<tr>
+					<td><b>Двигатель / редуктор:</b></td>
+					<td data-bind="text: name"></td>
+				</tr>
+				<tr>
+					<td><b>Мощность:</b></td>
+					<td data-bind="text: power() + ' л. с. / кВт'"></td>
+				</tr>
+				<tr>
+					<td><b>Максимальные обороты:</b></td>
+					<td data-bind="text: RPM() + ' об./мин'"></td>
+				</tr>
+				<tr>
+					<td><b>Вес:</b></td>
+					<td data-bind="text: weight() + ' кг'"></td>
+				</tr>
+				<tr>
+					<td><b>Габариты:</b></td>
+					<td data-bind="text: dimensions() + ' мм'"></td>
+				</tr>
+				<tr>
+					<td><b>Объем двигателя:</b></td>
+					<td data-bind="text: displacement() + ' л '"></td>
+				</tr>
+			</table>
+		</td>
+	<tr><td colspan="2"><b>Комплектующие:</b></td></tr>
 	<tr>
-		<td data-bind="text: category"></td>
-		<td data-bind="text: name"></td>
-		<td data-bind="text: power() + ' л. с. / кВт'"></td>
-		<td data-bind="text: RPM() + ' об./мин'"></td>
-		<td data-bind="text: weight() + ' кг'"></td>
-		<td data-bind="text: dimensions() + ' мм'"></td>
-		<td data-bind="text: displacement() + ' л '"></td>
+		<td colspan="2">
+			<table class="table table-bordered">
+			<thead>
+				<tr><th>Артикул</th><th>Название</th><th></th></tr>
+			</thead>
+			<tbody data-bind="foreach: accs()">
+				<tr>
+					<td data-bind="text: SKU"></td>
+					<td><a data-bind="text: name, attr: {href: URL}" target="_blank"></a></td>
+					<td>
+						
+					</td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
 	</tr>
-</table>
-<p>Комплектующие:</p>
-<table class="table">
-	<thead>
-		<tr><th>Артикул</th><th>Название</th><th></th></tr>
-	</thead>
-	<tbody data-bind="foreach: accs()">
-		<tr>
-			<td data-bind="text: SKU"></td>
-			<td data-bind="text: name"></td>
-			<td>
-				
-			</td>
-		</tr>
-	</tbody>
 </table>
 </div>

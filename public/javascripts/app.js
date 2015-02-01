@@ -29,7 +29,7 @@ function EngineAccViewModel() {
     self.RPM = ko.observable(0);                // Макс. обороты
     self.weight = ko.observable(0);             // Вес
     self.dimensions = ko.observable("");        // Габариты
-    self.displacement = ko.observable("");        // Объем  двигателя
+    self.displacement = ko.observable("");      // Объем  двигателя
     self.imglink = ko.observable("");           // Ссылка на изображение
     self.page = ko.observable("index");         // Страница
     // Загрузить двигатели
@@ -43,7 +43,7 @@ function EngineAccViewModel() {
                 self.engines([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.engines.push(new Engine(o.id,
+                    self.engines.push(new Engine(i,
                         o.name, o.category.name, o.power, 
                         o.RPM, o.weight, o.dimensions,
                         o.displacement, o.imglink));
@@ -63,7 +63,7 @@ function EngineAccViewModel() {
                 self.engines([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.engines.push(new Engine(o.id,
+                    self.engines.push(new Engine(i,
                         o.name, o.category.name, o.power,
                         o.RPM, o.weight, o.dimensions,
                         o.displacement, o.imglink));
@@ -82,7 +82,7 @@ function EngineAccViewModel() {
                 self.accs([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.accs.push(new Acc(o.id, o.name, o.SKU, o.URL));
+                    self.accs.push(new Acc(i, o.name, o.SKU, o.URL));
                 }
                 self.accs.valueHasMutated();
             }, error: function(data) { alert("АЛЯРМ ошибка!\n" + data.error()); }
