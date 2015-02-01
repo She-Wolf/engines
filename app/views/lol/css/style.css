@@ -1,0 +1,98 @@
+html, body,p , div, span, ul, li, input, textarea, form, h1,h2,h3,h4,h5,h6, table, tr, td, img
+{
+	margin:0;
+	padding:0;
+	border:0;
+	list-style-type: none;
+}
+
+.clear{height:1px;overflow:hidden;clear:both;}
+
+a{
+	text-decoration:none;
+}
+
+input:focus{
+	outline:none;
+}
+
+@font-face {
+	font-family: 'MYRIADPROREGULAR';
+	src: url('fonts/MYRIADPROREGULAR.eot');
+	src: local('fonts/MYRIADPROREGULAR'), url('fonts/MYRIADPROREGULAR.woff') format('woff'), url('fonts/MYRIADPROREGULAR.ttf') format('truetype');
+}
+
+html{
+	height:100%;
+}
+
+body{
+	color:white;
+	font-size:16px;
+	font-family: 'MYRIADPROREGULAR' !important;
+	background-color:#FF6600;
+	min-height:100%;
+	position:relative;
+	background:white;
+}
+
+h3{
+	text-align:center;
+	font-size:32px;
+	font-weight:700;
+	font-family: 'Exo 2', sans-serif;
+}
+
+#top{
+	background:#3C90D7;
+	line-height:29px;
+}
+	#top .logo{
+		display:inline-block;
+		margin-right:10px;
+	}
+		#top .logo img{
+			vertical-align: top;
+		}
+
+#center{
+	max-width:800px;
+	margin:0 auto;
+	color:#3C90D7;
+	text-align:center;
+	padding:10px;
+}
+	#center .left,#center .right{
+		display:inline-block;
+		padding:40px;
+		margin-top:10%;
+		margin-bottom:20px;
+		border:2px solid #3C90D7;/*Любую каёмочку задавай*/
+		border-radius:5px;
+	}
+	#center .left{
+		float:left;
+		margin-left:20%;
+	}
+	#center .right{
+		float:right;
+		margin-right:20%;
+	}
+	
+	#center p{
+		text-align:left;
+	}
+
+#footer{
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	min-height:20px;
+	line-height:20px;
+	padding:10px;
+	background:#3C90D7;
+}
+	#footer{
+		
+	}

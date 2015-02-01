@@ -1,6 +1,17 @@
 @main("Двигатели") {
 <div data-bind="visible: page() == 'index'">
-
+	<table width="100%">
+		<tr>
+		@for(cat <- Category.all) {
+			<td align="center">
+				<a class="btn btn-large btn-primary" href="#" 
+					data-bind="click: loadengines.bind($root, @cat.id)">
+						@cat.cat
+				</a>
+			</td>
+		}
+		</tr>
+	</table>
 </div>
 @engines()
 }

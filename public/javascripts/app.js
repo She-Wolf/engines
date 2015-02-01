@@ -1,6 +1,6 @@
 ﻿//Model
 function Engine(id, name, category, power, RPM, weight, 
-                dimensions, gear_ratio, imglink) {
+                dimensions, displacement, imglink) {
     this.id = ko.observable(id);
     this.name = ko.observable(name);
     this.category = ko.observable(category);
@@ -8,7 +8,7 @@ function Engine(id, name, category, power, RPM, weight,
     this.RPM = ko.observable(RPM);
     this.weight = ko.observable(weight);
     this.dimensions = ko.observable(dimensions);
-    this.gear_ratio = ko.observable(gear_ratio);
+    this.displacement = ko.observable(displacement);
     this.imglink = ko.observable(imglink);
 }
 function Acc(id, name, SKU, URL) {
@@ -29,7 +29,7 @@ function EngineAccViewModel() {
     self.RPM = ko.observable(0);                // Макс. обороты
     self.weight = ko.observable(0);             // Вес
     self.dimensions = ko.observable("");        // Габариты
-    self.gear_ratio = ko.observable("");        // Передаточные числа редуктора
+    self.displacement = ko.observable("");        // Объем  двигателя
     self.imglink = ko.observable("");           // Ссылка на изображение
     self.page = ko.observable("index");         // Страница
     // Загрузить двигатели
@@ -46,7 +46,7 @@ function EngineAccViewModel() {
                     self.engines.push(new Engine(o.id,
                         o.name, o.category.name, o.power, 
                         o.RPM, o.weight, o.dimensions,
-                        o.gear_ratio, o.imglink));
+                        o.displacement, o.imglink));
                 }
                 self.engines.valueHasMutated();
             }, error: function(data) { alert("Произошла ошибка!\n" + data.error()); }
@@ -56,7 +56,6 @@ function EngineAccViewModel() {
     self.loadenginesforacc = function(acc) {
         self.engines.destroyAll();
         self.page("engines");
-        activate(0);
         jsRoutes.controllers.Engines.getenginesbyacc().ajax({
             data: new Req(acc),
             success: function(data) {
@@ -67,13 +66,13 @@ function EngineAccViewModel() {
                     self.engines.push(new Engine(o.id,
                         o.name, o.category.name, o.power,
                         o.RPM, o.weight, o.dimensions,
-                        o.gear_ratio, o.imglink));
+                        o.displacement, o.imglink));
                 }
                 self.engines.valueHasMutated();
-            }, error: function(data) { alert("Произошла ошибка!\n" + data.error()); }
+            }, error: function(data) { alert("АЛЯРМ ошибка!" + data.error()); }
         });
     }
-    // Загрузить аксессуары
+    // Загрузить комплектующие
     self.loadaccs = function(id) {
         self.accs.destroyAll();
         jsRoutes.controllers.Engines.getaccsforengine().ajax({
@@ -86,7 +85,7 @@ function EngineAccViewModel() {
                     self.accs.push(new Acc(o.id, o.name, o.SKU, o.URL));
                 }
                 self.accs.valueHasMutated();
-            }, error: function(data) { alert("Произошла ошибка!\n" + data.error()); }
+            }, error: function(data) { alert("АЛЯРМ ошибка!\n" + data.error()); }
         });
     }
     // Загрузить двигатель
@@ -99,7 +98,7 @@ function EngineAccViewModel() {
         self.RPM(o.RPM());
         self.weight(o.weight());
         self.dimensions(o.dimensions());
-        self.gear_ratio(o.gear_ratio());
+        self.displacement(o.displacement());
         self.imglink(o.imglink());
         self.loadaccs(id);
     }

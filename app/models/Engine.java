@@ -26,7 +26,7 @@ public class Engine extends Model {
 	@NotNull
 	public String dimensions; // Габариты, ШхДхВ, мм
 	@NotNull
-	public String gear_ratio; // Передаточные числа редуктора
+	public String displacement; // Объем двигателя
 	@NotNull
 	public String imglink; // Ссылка на изображение
 	
