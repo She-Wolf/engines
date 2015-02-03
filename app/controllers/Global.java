@@ -740,13 +740,16 @@ public class Global extends GlobalSettings {
 		acc.URL = "http://bmb-irk.ru/index.php/vegatables-2/equipment";
 		acc.save();
 		
-//		acc = new Accessory();
-		
-//		acc.save();
+		acc = new Accessory();
+		acc.name = "Фильтр масляный";
+		acc.SKU = "3582732";
+		acc.URL = "http://bmb-irk.ru/index.php/vegatables-2/equipment";
+		acc.save();
 	}
 	
 	public void addMatchers() {
-		new Matcher(Accessory.byName("Масло VDS-2"), Engine.byName("D1-13 / MS15L, MS15A")).save();
-		
+		new Matcher(Accessory.bySKU("1141628"), Engine.byName("D1-13 / MS15L, MS15A")).save();
+		new Matcher(Accessory.bySKU("3582732"), Engine.byName("D4-180 / HS45AE, ZF63E")).save();
+		new Matcher(Accessory.bySKU("3582732"), Engine.byName("D4-225 / HS45AE, ZF63E")).save();
 	}
 }

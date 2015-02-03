@@ -1,6 +1,7 @@
 ﻿//Model
-function Engine(id, name, category, power, RPM, weight, 
+function Engine(n, id, name, category, power, RPM, weight, 
                 dimensions, displacement, imglink) {
+    this.n = ko.observable(n);
     this.id = ko.observable(id);
     this.name = ko.observable(name);
     this.category = ko.observable(category);
@@ -12,10 +13,10 @@ function Engine(id, name, category, power, RPM, weight,
     this.imglink = ko.observable(imglink);
 }
 function Acc(id, name, SKU, URL) {
-    this.id = id;
-    this.name = name;
-    this.SKU = SKU;
-    this.URL = URL;
+    this.id = ko.observable(id);
+    this.name = ko.observable(name);
+    this.SKU = ko.observable(SKU);
+    this.URL = ko.observable(URL);
 }
 function Req(param) { this.param = param; }
 //ViewModel
@@ -43,7 +44,7 @@ function EngineAccViewModel() {
                 self.engines([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.engines.push(new Engine(i,
+                    self.engines.push(new Engine(i, o.id,
                         o.name, o.category.name, o.power, 
                         o.RPM, o.weight, o.dimensions,
                         o.displacement, o.imglink));
@@ -53,17 +54,17 @@ function EngineAccViewModel() {
         });
     }
     // Загрузить двигатели для аксессуара
-    self.loadenginesforacc = function(acc) {
+    self.loadenginesforacc = function(id) {
         self.engines.destroyAll();
         self.page("engines");
         jsRoutes.controllers.Engines.getenginesbyacc().ajax({
-            data: new Req(acc),
+            data: new Req(id),
             success: function(data) {
                 self.engines.valueWillMutate();
                 self.engines([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.engines.push(new Engine(i,
+                    self.engines.push(new Engine(i, o.id,
                         o.name, o.category.name, o.power,
                         o.RPM, o.weight, o.dimensions,
                         o.displacement, o.imglink));
@@ -82,16 +83,16 @@ function EngineAccViewModel() {
                 self.accs([]);
                 for (i = 0; i < data.objects.length; i++) {
                     var o = data.objects[i];
-                    self.accs.push(new Acc(i, o.name, o.SKU, o.URL));
+                    self.accs.push(new Acc(o.id, o.name, o.SKU, o.URL));
                 }
                 self.accs.valueHasMutated();
             }, error: function(data) { alert("АЛЯРМ ошибка!\n" + data.error()); }
         });
     }
     // Загрузить двигатель
-    self.loadengine = function(id) {
+    self.loadengine = function(n) {
+        var o = self.engines()[n];
         self.page("engine");
-        var o = self.engines()[id];
         self.name(o.name());
         self.category(o.category());
         self.power(o.power());
@@ -100,7 +101,7 @@ function EngineAccViewModel() {
         self.dimensions(o.dimensions());
         self.displacement(o.displacement());
         self.imglink(o.imglink());
-        self.loadaccs(id);
+        self.loadaccs(o.id());
     }
 }
 ko.applyBindings(new EngineAccViewModel());

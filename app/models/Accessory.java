@@ -12,7 +12,7 @@ import play.db.ebean.Model;
 @Entity
 public class Accessory extends Model {
 	@Id
-	private Long id;
+	public Long id;
 	@NotNull
 	public String name; // Название
 	@NotNull
@@ -22,8 +22,8 @@ public class Accessory extends Model {
 	
 	private static Finder<Long, Accessory> find = new Finder<Long, Accessory>(Long.class, Accessory.class);
 	
-	public static Accessory byName(String name) {
-		List<Accessory> acc = find.where(Expr.ieq("name", name)).findList();
+	public static Accessory bySKU(String SKU) {
+		List<Accessory> acc = find.where(Expr.ieq("sku", SKU)).findList();
 		if(acc.isEmpty()) return null; else return acc.get(0);
 	}
 }
